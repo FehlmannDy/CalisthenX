@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: calisthenx_db
+    restart: always
+    environment:
+      POSTGRES_USER: calisthenx_usr
+      POSTGRES_PASSWORD: caliscoach_password
+      POSTGRES_DB: calisthenx_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
