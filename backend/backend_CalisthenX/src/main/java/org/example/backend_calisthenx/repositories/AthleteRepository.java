@@ -9,8 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface AthleteRepository extends JpaRepository<Athlete, Long> {
-    List<Athlete> findByLastName(String lastName);  // Trouver par nom de famille
-    Optional<Athlete> findByEmail(String email);    // Trouver un athlète par email
-    List<Athlete> findByCoachId(Long coachId);      // Trouver tous les athlètes d'un coach
+
+    Optional<Athlete> findByEmail(String email);
+    List<Athlete> findByCoachId(Long coachId);
 }
 
