@@ -1,6 +1,8 @@
 package org.example.backend_calisthenx.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -26,6 +28,8 @@ public abstract class User {
     @Column(nullable = false)
     private String lastName;
 
+    @NotBlank(message = "Email is obligatory")
+    @Email(message = "Email must be in valid format")
     @Column(unique = true, nullable = false)
     private String email;
 
