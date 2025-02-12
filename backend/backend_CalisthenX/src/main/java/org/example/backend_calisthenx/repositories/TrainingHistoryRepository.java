@@ -1,4 +1,13 @@
 package org.example.backend_calisthenx.repositories;
 
-public class TrainingHistoryRepository {
+import org.example.backend_calisthenx.models.Athlete;
+import org.example.backend_calisthenx.models.TrainingHistory;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface TrainingHistoryRepository extends JpaRepository<TrainingHistory, Long> {
+    Optional<TrainingHistory> findTrainingHistoryByAthlete(Athlete athlete);
 }

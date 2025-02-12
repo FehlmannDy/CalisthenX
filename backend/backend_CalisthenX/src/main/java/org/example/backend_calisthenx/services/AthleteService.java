@@ -36,5 +36,9 @@ public class AthleteService {
         }
         return athleteRepository.save(athlete);
     }
+
+    public Optional<Athlete> getAthleteById(Long id) {
+        return athleteRepository.findById(id);
+    }
 }
 
