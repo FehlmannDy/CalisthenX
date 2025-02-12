@@ -6,6 +6,7 @@ import org.example.backend_calisthenx.repositories.TrainingHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,8 +22,8 @@ public class TrainingHistoryService {
         return trainingHistoryRepository.findById(id);
     }
 
-    public Optional<TrainingHistory> getTrainingHistoryByAthlete(Athlete athlete) {
-        return trainingHistoryRepository.findTrainingHistoryByAthlete(athlete);
+    public List<TrainingHistory> getTrainingHistoryByAthlete(Athlete athlete) {
+        return trainingHistoryRepository.findByAthlete(athlete);
     }
 
     public TrainingHistory createTrainingHistory(TrainingHistory trainingHistory) {

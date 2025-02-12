@@ -5,9 +5,9 @@ import org.example.backend_calisthenx.models.TrainingHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface TrainingHistoryRepository extends JpaRepository<TrainingHistory, Long> {
-    Optional<TrainingHistory> findTrainingHistoryByAthlete(Athlete athlete);
+    List<TrainingHistory> findByAthlete(Athlete athlete);
 }

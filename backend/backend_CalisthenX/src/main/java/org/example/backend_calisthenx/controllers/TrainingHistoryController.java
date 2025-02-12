@@ -3,11 +3,14 @@ package org.example.backend_calisthenx.controllers;
 import lombok.RequiredArgsConstructor;
 import org.example.backend_calisthenx.exceptions.ResourceNotFoundException;
 import org.example.backend_calisthenx.models.TrainingHistory;
+import org.example.backend_calisthenx.models.Athlete;
 import org.example.backend_calisthenx.services.AthleteService;
 import org.example.backend_calisthenx.services.TrainingHistoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/training-history")
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class TrainingHistoryController {
 
     private final TrainingHistoryService trainingHistoryService;
-    private final AthleteService athleteService; // Service pour gérer les athlètes
+    private final AthleteService athleteService;
 
 
     @GetMapping("/{id}")
@@ -26,14 +29,12 @@ public class TrainingHistoryController {
     }
 
     @GetMapping("/athlete/{athleteId}")
-    public ResponseEntity<TrainingHistory> getTrainingHistoryByAthlete(@PathVariable Long athleteId) {
-        if(athleteService.getAthleteById(athleteId).isEmpty()) {
-            throw new ResourceNotFoundException("Athlete not found with ID: " + athleteId);
-        }
+    public ResponseEntity<List<TrainingHistory>> getTrainingHistoriesByAthlete(@PathVariable Long athleteId) {
+        Athlete athlete = athleteService.getAthleteById(athleteId)
+                .orElseThrow(() -> new ResourceNotFoundException("Athlete not found with ID: " + athleteId));
 
-        return trainingHistoryService.getTrainingHistoryByAthlete(athleteService.getAthleteById(athleteId).get())
-                .map(ResponseEntity::ok)
-                .orElseThrow(() -> new ResourceNotFoundException("Training history not found for athlete with ID: " + athleteId));
+        List<TrainingHistory> histories = trainingHistoryService.getTrainingHistoryByAthlete(athlete);
+        return ResponseEntity.ok(histories);
     }
 
     @PostMapping
