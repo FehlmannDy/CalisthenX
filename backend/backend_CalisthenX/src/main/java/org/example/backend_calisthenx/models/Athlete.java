@@ -1,5 +1,7 @@
 package org.example.backend_calisthenx.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +12,8 @@ import lombok.*;
 public class Athlete extends User {
 
     @ManyToOne
-    @JoinColumn(name = "coach_id") // Clé étrangère pour relier un athlète à son coach
+    @JoinColumn(name = "coach_id", nullable = false)
+    @JsonBackReference
     private Coach coach;
 
 }
