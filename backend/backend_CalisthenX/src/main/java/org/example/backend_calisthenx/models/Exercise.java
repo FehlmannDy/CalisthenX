@@ -1,6 +1,7 @@
 package org.example.backend_calisthenx.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String name;
     private String description;
 
