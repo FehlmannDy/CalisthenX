@@ -2,21 +2,15 @@ package org.example.backend_calisthenx.controllers;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
-import org.example.backend_calisthenx.exceptions.DuplicateResourceException;
-import org.example.backend_calisthenx.exceptions.GlobalExceptionHandler;
 import org.example.backend_calisthenx.exceptions.ResourceNotFoundException;
 import org.example.backend_calisthenx.models.Athlete;
-import org.example.backend_calisthenx.models.Coach;
 import org.example.backend_calisthenx.services.AthleteService;
-import org.example.backend_calisthenx.services.CoachService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/athletes")
@@ -24,15 +18,9 @@ import java.util.Optional;
 public class AthleteController {
 
     private final AthleteService athleteService;
-    private final PasswordEncoder passwordEncoder;
-    private final CoachService coachService;
-    private final GlobalExceptionHandler globalExceptionHandler;
 
-    public AthleteController(AthleteService athleteService, PasswordEncoder passwordEncoder, CoachService coachService, GlobalExceptionHandler globalExceptionHandler) {
+    public AthleteController(AthleteService athleteService) {
         this.athleteService = athleteService;
-        this.passwordEncoder = passwordEncoder;
-        this.coachService = coachService;
-        this.globalExceptionHandler = globalExceptionHandler;
     }
 
     // Récupérer tous les athlètes
