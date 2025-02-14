@@ -25,6 +25,9 @@ public class ExerciseController {
     @GetMapping
     public ResponseEntity<List<Exercise>> getAllExercises() {
         List<Exercise> exercises = exerciseService.findAll();
+        if (exercises.isEmpty()) {
+            throw new ResourceNotFoundException("No exercise found");
+        }
         return ResponseEntity.ok(exercises);
     }
 
@@ -46,12 +49,6 @@ public class ExerciseController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Exercise> updateExercise(@PathVariable Long id, @Valid @RequestBody Exercise exerciseDetails) {
-
-        Exercise existingExercise = exerciseService.findById(id);
-        if (existingExercise == null) {
-            throw new ResourceNotFoundException("Exercise with id " + id + " not found");
-        }
-
         Exercise updated = exerciseService.updateExercise(id, exerciseDetails);
         return ResponseEntity.ok(updated);
     }

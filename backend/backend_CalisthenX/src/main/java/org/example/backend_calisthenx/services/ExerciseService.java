@@ -3,10 +3,8 @@ package org.example.backend_calisthenx.services;
 import jakarta.validation.Valid;
 import org.example.backend_calisthenx.exceptions.ResourceNotFoundException;
 import org.example.backend_calisthenx.models.Exercise;
-import org.example.backend_calisthenx.models.ExerciseRecord;
 import org.example.backend_calisthenx.repositories.ExerciseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,22 +38,17 @@ public class ExerciseService {
     }
 
     public Exercise updateExercise(Long id, @Valid Exercise exerciseDetails) {
-        Exercise existingExercise = getExerciseById(id);
-        if (existingExercise != null) {
-            throw new ResourceNotFoundException("Exercise not found");
-        }
+        // Vérifier si l'exercice existe
+        Exercise existingExercise = exerciseRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Exercise with id " + id + " not found"));
 
+        // Mettre à jour les champs nécessaires
         existingExercise.setName(exerciseDetails.getName());
         existingExercise.setDescription(exerciseDetails.getDescription());
         existingExercise.setImageUrl(exerciseDetails.getImageUrl());
         existingExercise.setMuscleGroups(exerciseDetails.getMuscleGroups());
 
-        Exercise updatedExercise = exerciseRepository.save(existingExercise);
-        return updatedExercise;
-    }
-
-
-    private Exercise getExerciseById(Long id) {
-        return exerciseRepository.findById(id).orElse(null);
+        // Sauvegarder et retourner l'exercice mis à jour
+        return exerciseRepository.save(existingExercise);
     }
 }
