@@ -39,31 +39,12 @@ public class TrainingHistoryController {
 
     @PostMapping
     public ResponseEntity<TrainingHistory> createTrainingHistory(@RequestBody TrainingHistory trainingHistory) {
-        // Vérifier si l'athlète existe
-        if (trainingHistory.getAthlete() == null ||
-                athleteService.getAthleteById(trainingHistory.getAthlete().getId()).isEmpty()) {
-            assert trainingHistory.getAthlete() != null;
-            throw new ResourceNotFoundException("Athlete not found with ID: " + trainingHistory.getAthlete().getId());
-        }
-
         TrainingHistory createdTrainingHistory = trainingHistoryService.createTrainingHistory(trainingHistory);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTrainingHistory);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TrainingHistory> updateTrainingHistory(@PathVariable Long id, @RequestBody TrainingHistory trainingHistory) {
-        if (trainingHistoryService.getTrainingHistoryById(id).isEmpty()) {
-            throw new ResourceNotFoundException("Training history not found with ID: " + id);
-        }
-
-        // Vérifier si l'athlète existe avant la mise à jour
-        if (trainingHistory.getAthlete() == null ||
-                athleteService.getAthleteById(trainingHistory.getAthlete().getId()).isEmpty()) {
-            assert trainingHistory.getAthlete() != null;
-            throw new ResourceNotFoundException("Athlete not found with ID: " + trainingHistory.getAthlete().getId());
-        }
-
-        trainingHistory.setId(id);
+    public ResponseEntity<TrainingHistory> updateTrainingHistory(@RequestBody TrainingHistory trainingHistory) {
         TrainingHistory updatedTrainingHistory = trainingHistoryService.updateTrainingHistory(trainingHistory);
         return ResponseEntity.ok(updatedTrainingHistory);
     }

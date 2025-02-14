@@ -34,7 +34,7 @@ public class MuscleGroupService {
 
         update.setName(muscleGroup.getName());
         update.setExercises(muscleGroup.getExercises());
-        
+
         return muscleGroupRepository.save(update);
     }
 
