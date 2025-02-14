@@ -5,15 +5,16 @@ import jakarta.validation.constraints.Email;
 import org.example.backend_calisthenx.exceptions.DuplicateResourceException;
 import org.example.backend_calisthenx.exceptions.ResourceNotFoundException;
 import org.example.backend_calisthenx.models.Coach;
+import org.example.backend_calisthenx.services.AthleteService;
 import org.example.backend_calisthenx.services.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/coaches")
@@ -22,10 +23,15 @@ public class CoachController {
 
     @Autowired
     private CoachService coachService;
+    @Autowired
+    private AthleteService athleteService;
 
     @GetMapping
     public ResponseEntity<List<Coach>> getAllCoaches() {
         List<Coach> coaches = coachService.getAllCoaches();
+        if (coaches.isEmpty()) {
+            throw new ResourceNotFoundException("Coaches not found");
+        }
         return ResponseEntity.ok(coaches);
     }
 
@@ -45,9 +51,6 @@ public class CoachController {
 
     @PostMapping
     public ResponseEntity<Coach> saveCoach(@Valid @RequestBody Coach coach) {
-        if (coachService.getByEmail(coach.getEmail()).isPresent()) {
-            throw new DuplicateResourceException("Email already in use: " + coach.getEmail());
-        }
         Coach savedCoach = coachService.saveCoach(coach);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCoach);
     }
