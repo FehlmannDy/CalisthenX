@@ -1,8 +1,11 @@
 package org.example.backend_calisthenx.controllers;
 
+import org.example.backend_calisthenx.exceptions.ResourceNotFoundException;
 import org.example.backend_calisthenx.models.ExerciseSet;
 import org.example.backend_calisthenx.services.ExerciseSetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,18 +19,24 @@ public class ExerciseSetController {
     private ExerciseSetService exerciseSetService;
 
     @GetMapping("/exerciseRecord/{exerciseRecordId}")
-    public List<ExerciseSet> getExerciseSetsByExerciseRecord(@PathVariable Long exerciseRecordId) {
-        return exerciseSetService.getExerciseSetsByExerciseRecord(exerciseRecordId);
+    public ResponseEntity<List<ExerciseSet>> getExerciseSetsByExerciseRecord(@PathVariable Long exerciseRecordId) {
+        List<ExerciseSet> exerciseSets = exerciseSetService.getExerciseSetsByExerciseRecord(exerciseRecordId);
+        if (exerciseSets.isEmpty()) {
+            throw new ResourceNotFoundException("Exercise Set not found");
+        }
+        return ResponseEntity.ok(exerciseSets);
     }
 
     @PostMapping
-    public ExerciseSet createExerciseSet(@RequestBody ExerciseSet exerciseSet) {
-        return exerciseSetService.createExerciseSet(exerciseSet);
+    public ResponseEntity<ExerciseSet> createExerciseSet(@RequestBody ExerciseSet exerciseSet) {
+        ExerciseSet created = exerciseSetService.createExerciseSet(exerciseSet);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping
-    public ExerciseSet updateExerciseSet(@RequestBody ExerciseSet exerciseSet) {
-        return exerciseSetService.updateExerciseSet(exerciseSet);
+    public ResponseEntity<ExerciseSet> updateExerciseSet(@RequestBody ExerciseSet exerciseSet) {
+        ExerciseSet updated = exerciseSetService.updateExerciseSet(exerciseSet);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}/exerciseRecord/{exerciseRecordId}")
