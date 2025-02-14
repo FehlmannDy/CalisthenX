@@ -24,8 +24,8 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // Nouveau style lambda
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/home").permitAll()
-                        .requestMatchers("/api/athletes/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/api/athletes/save").hasRole("ADMIN")
+                        .requestMatchers("/api/athletes/**").hasRole("USER")
+                        .requestMatchers("/aip/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(httpBasic -> {}) // Configuration via lambda
