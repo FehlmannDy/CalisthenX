@@ -1,8 +1,10 @@
 package org.example.backend_calisthenx.services;
 
+import org.example.backend_calisthenx.exceptions.ResourceNotFoundException;
 import org.example.backend_calisthenx.models.MuscleGroup;
 import org.example.backend_calisthenx.repositories.MuscleGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.embedded.TomcatVirtualThreadsWebServerFactoryCustomizer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,10 +29,19 @@ public class MuscleGroupService {
     }
 
     public MuscleGroup updateMuscleGroup(MuscleGroup muscleGroup) {
-        return muscleGroupRepository.save(muscleGroup);
+        MuscleGroup update = muscleGroupRepository.findById(muscleGroup.getId())
+                .orElseThrow(()-> new ResourceNotFoundException("Muscle group not found"));
+
+        update.setName(muscleGroup.getName());
+        update.setExercises(muscleGroup.getExercises());
+        
+        return muscleGroupRepository.save(update);
     }
 
     public void deleteMuscleGroup(Long id) {
+        if(!muscleGroupRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Muscle group with id " + id + " not found");
+        }
         muscleGroupRepository.deleteById(id);
     }
 }
