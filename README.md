@@ -1,6 +1,10 @@
+![logo of CalisthenX](/frontend/public/BW_calisthenx.svg)
+
 # CalisthenX Full-Stack
 
 **CalisthenX** is a fitness application designed for calisthenics, allowing coaches and athletes to track and optimize their training. The project consists of a **Spring Boot** backend and a **React** frontend.
+
+![Frontend-Gui](/gitassets/frontend_gui.png)
 
 ---
 
@@ -51,7 +55,7 @@
 
 1. **Clone the Repository**  
    ```bash
-   git clone <REPO_URL>
+   git clone https://github.com/FehlmannDy/CalisthenX
    cd caliscoach-backend
    ```
    
@@ -65,15 +69,61 @@ This file configures PostgreSQL and the backend.
    Only PostgreSQL will be running on port 5432 yet !
 
 ### Running the Backend Locally (without Docker)
-Coming soon
+1. **Clone the Repository**
+```bash
+   git clone https://github.com/FehlmannDy/CalisthenX
+   cd CalisthenX/backend
+```
+2.  **Build the Project**
+```bash
+mvn clean install
+```
+3.  **Run the Application**
+```bash
+mvn spring-boot:run
+```
+The backend server will start, usually accessible at ```http://localhost:8080```.
+
+
 
 ### Running the Frontend
-Coming soon
+Prerequisites:
+
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
+
+Steps:
+
+  1. **Clone the Repository**
+
+```bash
+git clone https://github.com/FehlmannDy/CalisthenX
+cd CalisthenX/frontend
+```
+
+
+  2.  **Install Dependencies**
+```bash
+npm install
+```
+
+  3.  **Run the Application**
+
+```bash
+npm start
+```
+
+The frontend application will start, usually accessible at ```http://localhost:3000```.
 
 ---
 
 ## Project Structure
-Coming soon
+
+The project is organized into two main directories:
+
+  - ```backend/``` : Contains the server-side code, including controllers, services, and data models.
+
+  - ```frontend/``` : Contains the client-side code, including React components, state management, and UI elements.
 
 ---
 
