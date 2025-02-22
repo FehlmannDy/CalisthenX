@@ -18,6 +18,8 @@ public class Goal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
     private Integer targetValue; // Par exemple, 50 pompes
     private boolean validated;
     private LocalDateTime createdAt;
