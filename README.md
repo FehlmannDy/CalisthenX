@@ -1,5 +1,3 @@
-![logo of CalisthenX](/frontend/public/BW_calisthenx.svg)
-
 # CalisthenX Full-Stack
 
 **CalisthenX** is a fitness application designed for calisthenics, allowing coaches and athletes to track and optimize their training. The project consists of a **Spring Boot** backend and a **React** frontend.
