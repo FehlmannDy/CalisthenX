@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "athletes")
 @Getter @Setter
@@ -15,6 +17,9 @@ public class Athlete extends User {
     @JoinColumn(name = "coach_id", nullable = false)
     @JsonBackReference
     private Coach coach;
+
+    @OneToMany(mappedBy = "athlete", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
 
 }
 

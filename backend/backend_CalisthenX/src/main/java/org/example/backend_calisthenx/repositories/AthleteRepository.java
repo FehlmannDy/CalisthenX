@@ -12,7 +12,6 @@ public interface AthleteRepository extends JpaRepository<Athlete, Long> {
 
     Optional<Athlete> findByEmail(String email);
     List<Athlete> findByCoachId(Long coachId);
-
     Optional<Athlete> findAthleteByUsername(String username);
 }
 

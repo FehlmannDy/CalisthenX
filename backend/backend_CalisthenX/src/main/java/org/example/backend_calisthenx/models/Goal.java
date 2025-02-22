@@ -1,5 +1,6 @@
 package org.example.backend_calisthenx.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,14 +28,16 @@ public class Goal {
     // Relation avec l'athlète auquel l'objectif est assigné
     @ManyToOne
     @JoinColumn(name = "athlete_id", nullable = false)
+    @JsonBackReference
     private Athlete athlete;
 
     // Relation auto-référentielle pour les sous-objectifs
     @ManyToOne
     @JoinColumn(name = "parent_goal_id")
+    @JsonBackReference
     private Goal parentGoal;
 
     @OneToMany(mappedBy = "parentGoal", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Goal> subGoals = new ArrayList<>();
+    private List<Goal> subGoals;
 
 }
