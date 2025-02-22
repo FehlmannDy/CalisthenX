@@ -1,0 +1,25 @@
+meta {
+  name: 201 create athlete
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/api/athletes/save
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "username": "JD",
+    "email": "john.doe@email.com",
+    "password": "test",
+    "createdAt": "2025-02-12T13:21:17",
+    "coach": {
+      "id": 2
+    }
+  }
+}

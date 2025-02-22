@@ -1,0 +1,25 @@
+meta {
+  name: 409 create athlete conflict
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/athletes/save
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "username": "JD",
+    "email": "dylan@gmail.com",
+    "password": "test",
+    "createdAt": "2025-02-12T13:21:17",
+    "coach": {
+      "id": 1
+    }
+  }
+}

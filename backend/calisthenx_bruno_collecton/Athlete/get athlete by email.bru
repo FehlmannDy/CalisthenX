@@ -1,0 +1,15 @@
+meta {
+  name: get athlete by email
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/api/athletes/email?email=dylan@gmail.com
+  body: none
+  auth: inherit
+}
+
+params:query {
+  email: dylan@gmail.com
+}

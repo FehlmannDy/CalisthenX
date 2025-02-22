@@ -1,0 +1,23 @@
+meta {
+  name: create coach
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/api/coaches
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "username": "JDcoach",
+    "email": "john@ccoach.com",
+    "password": "test",
+    "createdAt": "2025-02-12T13:21:17",
+    "coachBrand" : "Calisthenics"
+  }
+}

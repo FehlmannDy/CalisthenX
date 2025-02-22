@@ -1,0 +1,25 @@
+meta {
+  name: 404 create athlete coach not found
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/athletes/save
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "firstName": "John",
+    "lastName": "Doeee",
+    "username": "JDee",
+    "email": "john.doe@email.cccom",
+    "password": "test",
+    "createdAt": "2025-02-12T13:21:17",
+    "coach": {
+      "id": 10
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "calisthenx_bruno_collecton",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
