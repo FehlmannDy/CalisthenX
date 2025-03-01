@@ -3,7 +3,8 @@
 import {useEffect, useState} from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { StudentCard } from "./components/student-card"
-import { WorkoutCreator } from "./components/workout-creator"
+import WorkoutCreator from "./components/workout-creator"
+import AthleteWeek from "./components/athlete-week"
 import { Sidebar } from "./components/sidebar"
 import axios from "axios";
 
@@ -58,6 +59,7 @@ export default function Dashboard() {
               <TabsList>
                 <TabsTrigger value="students">Progrès des Élèves</TabsTrigger>
                 <TabsTrigger value="workout">Créer une Séance</TabsTrigger>
+                <TabsTrigger value="athleteView">Vue de l'athlete</TabsTrigger>
               </TabsList>
 
               <TabsContent value="students">
@@ -80,6 +82,9 @@ export default function Dashboard() {
 
               <TabsContent value="workout">
                 <WorkoutCreator/>
+              </TabsContent>
+              <TabsContent value="athleteView">
+                <AthleteWeek id={1}/>
               </TabsContent>
             </Tabs>
           </div>
